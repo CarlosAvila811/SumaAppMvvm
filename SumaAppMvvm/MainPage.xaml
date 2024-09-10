@@ -1,0 +1,46 @@
+﻿ using Microsoft.Maui.Controls;
+using SumaAppMvvm.ViewModels;
+
+namespace SumaAppMvvm.Views
+{
+    public partial class SumarPage : ContentPage
+    {
+        private SumarViewModel _viewModel;
+
+        public SumarPage()
+        {
+            InitializeComponent();
+            _viewModel = new SumarViewModel();
+            BindingContext = _viewModel;
+        }
+
+        private void OnSumarClicked(object sender, EventArgs e)
+        {
+            _viewModel.SumarCommand.Execute(null);
+        }
+
+        private void OnLimpiarClicked(object sender, EventArgs e)
+        {
+            _viewModel.LimpiarCommand.Execute(null);
+        }
+    }
+}
+   <?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SumaAppMvvm.Views.SumarPage"
+             Title="Suma App">
+    <StackLayout Padding="20">
+        <Label Text="Ingrese el primer valor:" />
+        <Entry Text="{Binding Valor1, Mode=TwoWay}" Keyboard="Numeric" Placeholder="Valor 1" />
+
+        <Label Text="Ingrese el segundo valor:" />
+        <Entry Text="{Binding Valor2, Mode=TwoWay}" Keyboard="Numeric" Placeholder="Valor 2" />
+
+        <Button Text="Sumar" Command="{Binding SumarCommand}" />
+
+        <Label Text="{Binding Resultado}" FontSize="18" />
+
+        <Button Text="Limpiar" Command="{Binding LimpiarCommand}" />
+    </StackLayout>
+</ContentPage>
